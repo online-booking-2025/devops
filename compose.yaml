@@ -3,9 +3,6 @@ name: online-booking
 services:
 
   frontend:
-      depends_on:
-        # backend:
-        #   condition: service_healthy
       container_name: online-booking-frontend
       env_file:
         - ./online-booking-frontend/.env.production
