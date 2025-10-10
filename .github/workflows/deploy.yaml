@@ -27,10 +27,15 @@ jobs:
             df -h --output=size,used,avail /
 
             cd online-booking
+            
             git fetch origin main
             git reset --hard origin/main
-            
+
+            docker pull bering152/online-booking-frontend:latest
+            # docker pull bering152/online-booking-backend:latest
+
             docker compose -f compose.yaml down
             docker compose -f compose.yaml build
             docker compose -f compose.yaml up -d
+
             docker system prune -a --volumes -f

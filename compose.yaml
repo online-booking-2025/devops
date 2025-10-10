@@ -17,7 +17,7 @@ services:
       image: bering152/online-booking-frontend:latest
       restart: on-failure
       ports:
-        - "3002:3000"
+        - "3004:3000"
 
   # backend:
   #   depends_on:
@@ -34,7 +34,7 @@ services:
   #   image: bering152/online-booking-backend:latest
   #   restart: on-failure
   #   ports:
-  #     - 5002:5000
+  #     - 5003:5000
 
   database:
     container_name: online-booking-database
@@ -50,7 +50,7 @@ services:
     image: postgres:15
     restart: on-failure
     ports:
-      - 5435:5432
+      - 5437:5432
 
 volumes:
   db-data:
