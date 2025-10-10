@@ -1,0 +1,57 @@
+name: online-booking
+
+services:
+
+  frontend:
+      depends_on:
+        # backend:
+        #   condition: service_healthy
+      container_name: online-booking-frontend
+      env_file:
+        - ./online-booking-frontend/.env.production
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3000"]
+        interval: 30s
+        timeout: 10s
+        retries: 3
+      image: bering152/online-booking-frontend:latest
+      restart: on-failure
+      ports:
+        - "3002:3000"
+
+  # backend:
+  #   depends_on:
+  #     database:
+  #       condition: service_healthy
+  #   container_name: online-booking-backend
+  #   env_file:
+  #     - ./online-booking-backend/.env.production
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #   image: bering152/online-booking-backend:latest
+  #   restart: on-failure
+  #   ports:
+  #     - 5002:5000
+
+  database:
+    container_name: online-booking-database
+    env_file:
+      - ./online-booking-database/.env.production
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    image: postgres:15
+    restart: on-failure
+    ports:
+      - 5435:5432
+
+volumes:
+  db-data:
+    name: online-booking-db-data
