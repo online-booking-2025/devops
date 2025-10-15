@@ -1,42 +1,40 @@
-name: online-booking
+name: mapiqo
 
 services:
-
   frontend:
-      container_name: online-booking-frontend
+      container_name: mapiqo-frontend
       env_file:
-        - ./online-booking-frontend/.env.production
+        - ./mapiqo-frontend/.env.production
       healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:3000"]
         interval: 30s
         timeout: 10s
         retries: 3
-      image: bering152/online-booking-frontend:latest
+      image: bering152/mapiqo-frontend:latest
       restart: on-failure
       ports:
         - "3004:3000"
-
-  # backend:
-  #   depends_on:
-  #     database:
-  #       condition: service_healthy
-  #   container_name: online-booking-backend
-  #   env_file:
-  #     - ./online-booking-backend/.env.production
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 3
-  #   image: bering152/online-booking-backend:latest
-  #   restart: on-failure
-  #   ports:
-  #     - 5003:5000
+  backend:
+    depends_on:
+      database:
+        condition: service_healthy
+    container_name: mapiqo-backend
+    env_file:
+      - ./mapiqo-backend/.env.production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    image: bering152/mapiqo-backend:latest
+    restart: on-failure
+    ports:
+      - 5004:5000
 
   database:
-    container_name: online-booking-database
+    container_name: mapiqo-database
     env_file:
-      - ./online-booking-database/.env.production
+      - ./mapiqo-database/.env.production
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
@@ -51,4 +49,4 @@ services:
 
 volumes:
   db-data:
-    name: online-booking-db-data
+    name: mapiqo-db-data

@@ -26,13 +26,13 @@ jobs:
             echo "=== Disk usage ==="
             df -h --output=size,used,avail /
 
-            cd online-booking
+            cd mapiqo
             
             git fetch origin main
             git reset --hard origin/main
 
-            docker pull bering152/online-booking-frontend:latest
-            # docker pull bering152/online-booking-backend:latest
+            docker pull bering152/mapiqo-frontend:latest
+            docker pull bering152/mapiqo-backend:latest
 
             docker compose -f compose.yaml down
             docker compose -f compose.yaml build
