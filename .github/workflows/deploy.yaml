@@ -38,4 +38,6 @@ jobs:
             docker compose -f compose.yaml build
             docker compose -f compose.yaml up -d
 
+            docker compose exec -T backend npx prisma db push
+
             docker system prune -a --volumes -f
