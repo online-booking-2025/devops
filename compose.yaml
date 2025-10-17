@@ -13,7 +13,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    image: bering152/mapiqo-frontend:latest
     restart: on-failure
     ports:
       - "3004:3000"
@@ -29,7 +28,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    image: bering152/mapiqo-backend:latest
     restart: on-failure
     ports:
       - 5004:5000

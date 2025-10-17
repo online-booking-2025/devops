@@ -33,8 +33,8 @@ jobs:
 
             docker compose -f compose.yaml down
             
-            docker pull bering152/mapiqo-frontend:latest
-            docker pull bering152/mapiqo-backend:latest
+            docker pull mapiqo/mapiqo-frontend:latest
+            docker pull mapiqo/mapiqo-backend:latest
 
             docker compose -f compose.yaml build
             docker compose -f compose.yaml up -d
